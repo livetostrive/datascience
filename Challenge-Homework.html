@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Parcel Sandbox</title>
+    <meta charset="UTF-8" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://kit.fontawesome.com/26c5ca9924.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <style>
+      img {
+        display: block;
+
+        /*position: absolute;*/
+      }
+
+      form {
+        width: 10cm;
+        /*border: 0.05cm solid rgb(0, 110, 197);*/
+        padding: 3px;
+        margin: 20px 16px;
+        font-size: 0.58cm;
+        color: rgb(0, 110, 197);
+        position: relative;
+        left: 25px;
+        bottom: 70px;
+      }
+
+      h4 {
+        margin: 40px;
+        bottom: 100px;
+        position: relative;
+      }
+      h3.i {
+        color: black;
+      }
+      .card i {
+        color: #ffe88d;
+      }
+
+      .maintemp i {
+        color: #ffe88d;
+        bottom: 100px;
+        position: relative;
+      }
+
+      .currenttemp {
+        color: rgb(171, 71, 188);
+        font-size: 100px;
+        bottom: 100px;
+        position: relative;
+      }
+
+      .summary {
+        font: weight 100;
+        color: rgb(0, 110, 197);
+      }
+
+      .misc {
+        position: relative;
+        /**/
+        float: right;
+        right: 100px;
+        color: rgb(0, 110, 197);
+        bottom: 4.85cm;
+        right: 4.85cm;
+      }
+
+      .recent {
+        position: relative;
+        float: right;
+        display: block;
+        color: rgb(171, 71, 188);
+        background-color: rgb(246, 236, 248);
+        bottom: 1.95cm;
+        right: 1.95cm;
+      }
+
+      #current-form {
+        width: 10cm;
+        position: relative;
+        left: 500px;
+        bottom: 135px;
+      }
+
+      .row {
+        /*padding: 0 0 0 15%;*/
+        margin: 0 auto;
+        position: relative;
+        bottom: 110px;
+      }
+
+      .container {
+        border: 0.1cm solid rgb(0, 110, 197);
+        width: 800px;
+        height: 650px;
+      }
+
+      .col-2 {
+        text-align: center;
+        display: block;
+        color: rgb(0, 110, 197);
+        font-size: 20px;
+        /**/
+      }
+
+      .card-text1 {
+        color: rgb(171, 71, 188);
+        font-size: 20px;
+      }
+
+      .card {
+        text-align: center;
+        display: block;
+        position: relative;
+        border: 0.01cm solid #60a4db;
+        border-radius: 80cm;
+        height: 50%;
+        width: 30%;
+        padding: 20px 0;
+        margin: 10px auto;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <section>
+        <a href="#" id="cel"
+          ><img src="celcius.jpg" alt="CelciusIcon" width="60" />
+        </a>
+        <a href="#" id="fah"
+          ><img src="fahrenheit3.jpg" alt="FahrenheitIcon" width="60" />
+        </a>
+
+        <form id="text-form">
+          <input type="text" id="text-input" placeholder="Enter a city" />
+          <input type="submit" value="search" />
+        </form>
+        <form id="current-form">
+          <input type="submit" value="Current Location" />
+        </form>
+        <!--<h3>Insert City &nbsp; &nbsp; &nbsp;<i class="fas fa-search"></i></h3>-->
+      </section>
+      <span class="recent">
+        <h5>
+          <em
+            ><strong>Most Recent (Current Temp): </strong> <br />
+            Lauderhill, FL &nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;91° F <br />
+            Washington, D.C &nbsp;&nbsp;&nbsp;&nbsp;78° F<br />
+            San Diego, CA &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;90° F<br />
+            Tampa, FL &nbsp; &nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;85° F
+          </em>
+        </h5>
+      </span>
+      <div class="summary">
+        <h4>
+          <span class="searchCity"> Lauderhill, FL </span> <br />
+          <span class="currentTime">Sunday 12:00 PM </span> <br />
+          <span>Mostly cloudy</span>
+        </h4>
+      </div>
+
+      <section>
+        <h1>
+          <p class="maintemp">
+            <i class="fas fa-cloud-sun"></i>
+            <span class="currenttemp"> 91° F </span>
+          </p>
+        </h1>
+
+        <span class="misc">
+          <h5>
+            Precipitation: 0%<br />
+            Wind: 8mph<br />
+          </h5>
+        </span>
+      </section>
+      <br />
+      <br />
+      <br />
+      <footer>
+        <div class="row">
+          <div class="col-2">
+            Mon
+            <div class="card" style="width: 5rem;">
+              <i class="fas fa-cloud-sun"></i>
+            </div>
+            <p class="card-text1">91°F</p>
+          </div>
+
+          &nbsp; &nbsp; &nbsp;
+
+          <div class="col-2">
+            Tue
+            <div class="card" style="width: 5rem;">
+              <i class="fas fa-cloud-sun"></i>
+            </div>
+            <p class="card-text1">91°F</p>
+          </div>
+
+          &nbsp; &nbsp; &nbsp;
+
+          <div class="col-2">
+            Wed
+            <div class="card" style="width: 5rem;">
+              <i class="fas fa-cloud-sun"></i>
+            </div>
+            <p class="card-text1">91°F</p>
+          </div>
+
+          &nbsp; &nbsp; &nbsp;
+
+          <div class="col-2">
+            Thu
+            <div class="card" style="width: 5rem;">
+              <i class="fas fa-cloud-sun"></i>
+            </div>
+            <p class="card-text1">91°F</p>
+          </div>
+
+          &nbsp; &nbsp; &nbsp;
+
+          <div class="col-2">
+            Fri
+            <div class="card" style="width: 5rem;">
+              <i class="fas fa-cloud-sun"></i>
+            </div>
+            <p class="card-text1">91°F</p>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script>
+      ///////This function sets the page to the correct date and time
+      function showTime(event) {
+        let Time = event.getHours();
+        if (Time >= 12) {
+          Time = "PM";
+        } else {
+          Time = "AM";
+        }
+
+        ///////////////////////////////
+
+        let currentHour = event.getHours();
+        if (currentHour === 0) {
+          currentHour = 12;
+        } else {
+          if (currentHour > 12 && currentHour - 12 < 10) {
+            currentHour = `0${currentHour - 12}`;
+          } else {
+            if (currentHour < 12 && currentHour < 10) {
+              currentHour = `0${currentHour}`;
+            } else {
+              currentHour = event.getHours();
+            }
+          }
+        }
+
+        let days = [
+          "Sunday",
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+        ];
+        let currentDay = days[event.getDay()];
+
+        let currentMinute = event.getMinutes();
+        if (currentMinute < 10) {
+          currentMinute = `0${currentMinute}`;
+        }
+
+        let current = document.querySelector(".currentTime");
+        current.innerHTML = `${currentDay} ${currentHour}:${currentMinute} ${Time}`;
+      }
+      let change = document.querySelector(".currentTime");
+      change.addEventListener("", showTime);
+
+      showTime(new Date());
+
+      ///////This function returns the temp of the searched location
+
+      function showWeather(response) {
+        let header = document.querySelector(".currenttemp");
+        let temperature = Math.round((response.data.main.temp * 9) / 5 + 32);
+        header.innerHTML = `${temperature}° F`;
+      }
+
+      ///////This function displays on the page the searched location
+
+      function cityName(call) {
+        call.preventDefault();
+        let city = document.querySelector(".searchCity");
+        let cityvalue = document.querySelector("#text-input");
+        city.innerHTML = cityvalue.value;
+        let apiKey = "3783047c04cbb1fbfe632061ff9aafcd";
+        let url = `https://api.openweathermap.org/data/2.5/weather?q=${cityvalue.value}&appid=${apiKey}&units=metric`;
+        axios.get(url).then(showWeather);
+      }
+      let citynow = document.querySelector("#text-form");
+      citynow.addEventListener("submit", cityName);
+
+      ///////This function gives the current temp at the current lat/lon
+
+      function currentWeather(response) {
+        let header = document.querySelector(".currenttemp");
+        let temperature = Math.round((response.data.main.temp * 9) / 5 + 32);
+        header.innerHTML = `${temperature}° F`;
+      }
+
+      function Location(position) {
+        let apiKey = "3783047c04cbb1fbfe632061ff9aafcd";
+        let lat = position.coords.latitude;
+        let lon = position.coords.longitude;
+        let url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
+        axios.get(url).then(currentWeather);
+      }
+
+      function getLoc(event) {
+        event.preventDefault();
+        navigator.geolocation.getCurrentPosition(Location);
+      }
+
+      let geolocal = document.querySelector("#current-form");
+      geolocal.addEventListener("submit", getLoc);
+    </script>
+  </body>
+</html>

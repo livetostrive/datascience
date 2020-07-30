@@ -282,10 +282,14 @@
           if (currentHour > 12 && currentHour - 12 < 10) {
             currentHour = `0${currentHour - 12}`;
           } else {
-            if (currentHour < 12 && currentHour < 10) {
-              currentHour = `0${currentHour}`;
+            if (currentHour > 12 && currentHour - 12 >= 10) {
+              currentHour = currentHour - 12;
             } else {
-              currentHour = event.getHours();
+              if (currentHour < 12 && currentHour < 10) {
+                currentHour = `0${currentHour}`;
+              } else {
+                currentHour = event.getHours();
+              }
             }
           }
         }

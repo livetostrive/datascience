@@ -15,10 +15,16 @@
     ></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <style>
+      body {
+        font-family: arial, sans-serif;
+        padding: 30px;
+        margin: 10px auto;
+      }
+
       img {
         display: block;
-
-        /*position: absolute;*/
+        /*margin-bottom: 0;
+        position: absolute;*/
       }
 
       form {
@@ -31,36 +37,68 @@
         position: relative;
         left: 25px;
         bottom: 70px;
+        margin-bottom: 0;
       }
 
       h4 {
         margin: 40px;
         bottom: 100px;
         position: relative;
+        margin-bottom: 0;
       }
-      h3.i {
-        color: black;
+
+      h1 {
+        margin: 40px;
+        bottom: 70px;
+        position: relative;
+        margin-bottom: 0;
       }
+
+      .container {
+        border: 0.1cm solid rgb(0, 110, 197);
+        width: 800px;
+        height: 500px;
+      }
+
+      .iconSection {
+        position: relative;
+        bottom: -10.325px;
+        right: -2.325px;
+        width: 0.5cm;
+        padding: 0;
+      }
+
+      .active {
+        cursor: default;
+      }
+
       .card i {
         color: #ffe88d;
       }
 
-      .maintemp i {
-        color: #ffe88d;
-        bottom: 100px;
+      .main_icon {
+        color: black;
+        font-size: 100px;
+        bottom: 50px;
+        left: 10px;
         position: relative;
       }
 
-      .currenttemp {
+      .currentTemp {
         color: rgb(171, 71, 188);
-        font-size: 100px;
-        bottom: 100px;
+        font-size: 80px;
+        bottom: 110px;
+        left: 50px;
         position: relative;
       }
 
       .summary {
         font: weight 100;
         color: rgb(0, 110, 197);
+        margin-bottom: 0;
+        bottom: 0.95cm;
+        position: relative;
+        text-transform: capitalize;
       }
 
       .misc {
@@ -69,8 +107,9 @@
         float: right;
         right: 100px;
         color: rgb(0, 110, 197);
-        bottom: 4.85cm;
+        bottom: 6.85cm;
         right: 4.85cm;
+        margin: 0;
       }
 
       .recent {
@@ -79,8 +118,9 @@
         display: block;
         color: rgb(171, 71, 188);
         background-color: rgb(246, 236, 248);
-        bottom: 1.95cm;
+        bottom: 2.95cm;
         right: 1.95cm;
+        margin-bottom: 0;
       }
 
       #current-form {
@@ -94,26 +134,23 @@
         /*padding: 0 0 0 15%;*/
         margin: 0 auto;
         position: relative;
-        bottom: 150px;
-      }
-
-      .container {
-        border: 0.1cm solid rgb(0, 110, 197);
-        width: 800px;
-        height: 650px;
+        bottom: 250px;
+        border: 0.5px dashed rgb(0, 110, 197);
+        height: 110px;
       }
 
       .col-2 {
         text-align: center;
         display: block;
         color: rgb(0, 110, 197);
-        font-size: 20px;
+        font-size: 15px;
+        bottom: -10px;
         /**/
       }
 
       .card-text1 {
         color: rgb(171, 71, 188);
-        font-size: 20px;
+        font-size: 15px;
       }
 
       .card {
@@ -121,128 +158,120 @@
         display: block;
         position: relative;
         border: 0.01cm solid #60a4db;
-        border-radius: 80cm;
-        height: 50%;
-        width: 30%;
-        padding: 20px 0;
-        margin: 10px auto;
+        border-radius: 510px;
+        padding: 10px 0;
+        margin: 2px auto;
       }
+
+      .weatherUpdate,
+      .weatherUpdateDt {
+        color: rgb(171, 71, 188);
+        position: relative;
+        left: 1px;
+        bottom: 230px;
+      }
+
       p.endLink {
         text-align: center;
+        position: relative;
+        left: 230px;
       }
     </style>
   </head>
 
   <body>
     <div class="container">
-      <section>
-        <a href="#" id="cel"
-          ><img src="celcius.jpg" alt="CelciusIcon" width="60" />
+      <section class="iconSection">
+        <a href="#" id="cel" class="notactive"
+          ><img
+            id="CelPic"
+            src="celcius_on.jpg"
+            alt="CelciusIconOff"
+            width="35"
+          />
         </a>
-        <a href="#" id="fah"
-          ><img src="fahrenheit3.jpg" alt="FahrenheitIcon" width="60" />
+        <a href="#" id="fah" class="active"
+          ><img
+            id="FahPic"
+            src="fahrenheit_off.jpg"
+            alt="FahrenheitIconOn"
+            width="36"
+          />
         </a>
-
-        <form id="text-form">
-          <input type="text" id="text-input" placeholder="Enter a city" />
-          <input type="submit" value="search" />
-        </form>
-        <form id="current-form">
-          <input type="submit" value="Current Location" />
-        </form>
         <!--<h3>Insert City &nbsp; &nbsp; &nbsp;<i class="fas fa-search"></i></h3>-->
       </section>
+      <form id="text-form">
+        <input
+          type="search"
+          id="text-input"
+          placeholder="Enter a city"
+          autocomplete="off"
+        />
+        <input type="submit" value="search" />
+      </form>
+      <form id="current-form">
+        <input type="submit" value="Current Location" />
+      </form>
       <span class="recent">
         <h5>
           <em
             ><strong>Most Recent (Current Temp): </strong> <br />
-            Lauderhill, FL &nbsp;
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;91° F <br />
-            Washington, D.C &nbsp;&nbsp;&nbsp;&nbsp;78° F<br />
-            San Diego, CA &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;90° F<br />
-            Tampa, FL &nbsp; &nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;85° F
+            <span class="recentCity">Lauderhill, FL</span> &nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+              class="recentCityTemp"
+              >20°C</span
+            >
+            <br />
+            <span class="recentCity">Washington, D.C</span>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="recentCityTemp"
+              >18°C</span
+            ><br />
+            <span class="recentCity">San Diego, CA</span> &nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="recentCityTemp"
+              >15°C</span
+            ><br />
+            <span class="recentCity">Tampa, FL</span> &nbsp; &nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+              class="recentCityTemp"
+              >19°C</span
+            >
           </em>
         </h5>
       </span>
       <div class="summary">
         <h4>
-          <span class="searchCity"> Lauderhill, FL </span> <br />
-          <span class="currentTime">Sunday 12:00 PM </span> <br />
-          <span>Mostly cloudy</span>
+          <span class="searchCity"> </span> <br />
+          <span class="currentTime"></span> <br />
+          <span class="currentDescription"></span>
         </h4>
       </div>
 
-      <section>
-        <h1>
-          <p class="maintemp">
-            <i class="fas fa-cloud-sun"></i>
-            <span class="currenttemp"> 91° F </span>
-          </p>
-        </h1>
+      <h1>
+        <div class="main_icon">
+          <img class="MainIcon_Yes" src="" alt="" width="40" />
+        </div>
+        <p class="maintemp">
+          <em><span class="currentTemp"></span></em>
+        </p>
+      </h1>
 
-        <span class="misc">
-          <h5>
-            Precipitation: 0%<br />
-            Wind: 8mph<br />
-          </h5>
-        </span>
-      </section>
+      <div class="misc">
+        <h5>
+          Humidity: <span class="currentHumidity"></span>%<br />
+          Wind: <span class="currentWind"></span>mph<br />
+        </h5>
+      </div>
       <br />
       <br />
       <br />
       <footer>
-        <div class="row">
-          <div class="col-2">
-            Mon
-            <div class="card" style="width: 5rem;">
-              <i class="fas fa-cloud-sun"></i>
-            </div>
-            <p class="card-text1">91°F</p>
-          </div>
-
-          &nbsp; &nbsp; &nbsp;
-
-          <div class="col-2">
-            Tue
-            <div class="card" style="width: 5rem;">
-              <i class="fas fa-cloud-sun"></i>
-            </div>
-            <p class="card-text1">91°F</p>
-          </div>
-
-          &nbsp; &nbsp; &nbsp;
-
-          <div class="col-2">
-            Wed
-            <div class="card" style="width: 5rem;">
-              <i class="fas fa-cloud-sun"></i>
-            </div>
-            <p class="card-text1">91°F</p>
-          </div>
-
-          &nbsp; &nbsp; &nbsp;
-
-          <div class="col-2">
-            Thu
-            <div class="card" style="width: 5rem;">
-              <i class="fas fa-cloud-sun"></i>
-            </div>
-            <p class="card-text1">91°F</p>
-          </div>
-
-          &nbsp; &nbsp; &nbsp;
-
-          <div class="col-2">
-            Fri
-            <div class="card" style="width: 5rem;">
-              <i class="fas fa-cloud-sun"></i>
-            </div>
-            <p class="card-text1">91°F</p>
-          </div>
-        </div>
+        <div class="row"></div>
       </footer>
+
+      <span class="weatherUpdate">Last Updated Date:</span>
+      <span class="weatherUpdateDt"></span>
     </div>
+
     <p class="endLink">
       This project was created by
       <a
@@ -263,36 +292,11 @@
         >Netlify.
       </a>
     </p>
+
     <script>
-      ///////This function sets the page to the correct date and time
-      function showTime(event) {
-        let Time = event.getHours();
-        if (Time >= 12) {
-          Time = "PM";
-        } else {
-          Time = "AM";
-        }
-
-        ///////////////////////////////
-
-        let currentHour = event.getHours();
-        if (currentHour === 0) {
-          currentHour = 12;
-        } else {
-          if (currentHour > 12 && currentHour - 12 < 10) {
-            currentHour = `0${currentHour - 12}`;
-          } else {
-            if (currentHour > 12 && currentHour - 12 >= 10) {
-              currentHour = currentHour - 12;
-            } else {
-              if (currentHour < 12 && currentHour < 10) {
-                currentHour = `0${currentHour}`;
-              } else {
-                currentHour = event.getHours();
-              }
-            }
-          }
-        }
+      //////////////////////
+      function formatDate(timestamp) {
+        let date = new Date(timestamp);
 
         let days = [
           "Sunday",
@@ -303,57 +307,138 @@
           "Friday",
           "Saturday",
         ];
-        let currentDay = days[event.getDay()];
-
-        let currentMinute = event.getMinutes();
-        if (currentMinute < 10) {
-          currentMinute = `0${currentMinute}`;
+        let day = days[date.getDay()];
+        return `${day} ${formatHours(timestamp)}`;
+      }
+      //////////////////////
+      function formatHours(timestamp) {
+        let date = new Date(timestamp);
+        let hours = date.getHours();
+        if (hours === 0) {
+          hours = 12;
+        } else {
+          if (hours > 12 && hours - 12 < 10) {
+            hours = `0${hours - 12}`;
+          } else {
+            if (hours > 12 && hours - 12 >= 10) {
+              hours = hours - 12;
+            } else {
+              if (hours < 12 && hours < 10) {
+                hours = `0${hours}`;
+              } else {
+                if (hours < 12 && hours >= 10) {
+                  hours = hours;
+                } else {
+                  hours = date.getHours();
+                }
+              }
+            }
+          }
         }
 
+        let minutes = date.getMinutes();
+        if (minutes < 10) {
+          minutes = `0${minutes}`;
+        }
+
+        let Time = date.getHours();
+        if (Time >= 12) {
+          Time = "PM";
+        } else {
+          Time = "AM";
+        }
+
+        return `${hours}:${minutes} ${Time} `;
+      }
+      //////////////////////
+      function displayTemperature(response) {
+        let temperatureElement = document.querySelector(".currentTemp");
+        let cityElement = document.querySelector(".searchCity");
+        let descriptionElement = document.querySelector(".currentDescription");
+        let humidityElement = document.querySelector(".currentHumidity");
+        let windElement = document.querySelector(".currentWind");
+        let iconElement = document.querySelector(".MainIcon_Yes");
+        let dateElement = document.querySelector(".weatherUpdateDt");
+
+        celsiusTemperature = response.data.main.temp;
+
+        temperatureElement.innerHTML = `${Math.round(celsiusTemperature)}°C`;
+        cityElement.innerHTML = response.data.name;
+        descriptionElement.innerHTML = response.data.weather[0].description;
+        humidityElement.innerHTML = response.data.main.humidity;
+        windElement.innerHTML = Math.round(response.data.wind.speed);
+        dateElement.innerHTML = formatDate(response.data.dt * 1000);
+        iconElement.setAttribute(
+          "src",
+          `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+        );
+        iconElement.setAttribute("alt", response.data.weather[0].description);
+
         let current = document.querySelector(".currentTime");
-        current.innerHTML = `${currentDay} ${currentHour}:${currentMinute} ${Time}`;
+        current.innerHTML = `${formatDate(new Date())}`;
       }
-      let change = document.querySelector(".currentTime");
-      change.addEventListener("", showTime);
+      //////////////////////
 
-      showTime(new Date());
+      function dispalyForecast(response) {
+        let forecastElement = document.querySelector(".row");
+        forecastElement.innerHTML = null;
+        let forecast = null;
 
-      ///////This function returns the temp of the searched location
+        for (let index = 0; index < 6; index++) {
+          forecast = response.data.list[index];
+          forecastElement.innerHTML += `
+        <div class="col-2">
+          <h3 class = "card-text1">
+            ${formatHours(forecast.dt * 1000)}
+          </h3>
+          <img
+          class="card"
+           width="43"
+           height="45"
+            src="http://openweathermap.org/img/wn/${
+              forecast.weather[0].icon
+            }@2x.png"
 
-      function showWeather(response) {
-        let header = document.querySelector(".currenttemp");
-        let temperature = Math.round((response.data.main.temp * 9) / 5 + 32);
-        header.innerHTML = `${temperature}° F`;
+          />
+          <div class="card-text1">
+            <strong>
+              ${Math.round(forecast.main.temp_max)}°C
+            </strong> /
+            ${Math.round(forecast.main.temp_min)}°C
+          </div>
+      `;
+        }
       }
 
-      ///////This function displays on the page the searched location
+      //////////////////////
+      function search(city) {
+        let apiKey = "3783047c04cbb1fbfe632061ff9aafcd";
+        let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+        axios.get(apiUrl).then(displayTemperature);
 
-      function cityName(call) {
-        call.preventDefault();
+        apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`;
+        axios.get(apiUrl).then(dispalyForecast);
+      }
+      //////////////////////
+      function SearchSubmit(event) {
+        event.preventDefault();
         let city = document.querySelector(".searchCity");
         let cityvalue = document.querySelector("#text-input");
         city.innerHTML = cityvalue.value;
-        let apiKey = "3783047c04cbb1fbfe632061ff9aafcd";
-        let url = `https://api.openweathermap.org/data/2.5/weather?q=${cityvalue.value}&appid=${apiKey}&units=metric`;
-        axios.get(url).then(showWeather);
+        search(cityvalue.value);
       }
-      let citynow = document.querySelector("#text-form");
-      citynow.addEventListener("submit", cityName);
 
-      ///////This function gives the current temp at the current lat/lon
-
-      function currentWeather(response) {
-        let header = document.querySelector(".currenttemp");
-        let temperature = Math.round((response.data.main.temp * 9) / 5 + 32);
-        header.innerHTML = `${temperature}° F`;
-      }
+      /////////////////////////////////
 
       function Location(position) {
         let apiKey = "3783047c04cbb1fbfe632061ff9aafcd";
         let lat = position.coords.latitude;
         let lon = position.coords.longitude;
         let url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
-        axios.get(url).then(currentWeather);
+        axios.get(url).then(displayTemperature);
+
+        url = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
+        axios.get(url).then(dispalyForecast);
       }
 
       function getLoc(event) {
@@ -363,6 +448,65 @@
 
       let geolocal = document.querySelector("#current-form");
       geolocal.addEventListener("submit", getLoc);
+
+      //////////////////////
+      function displayFahrenheitTemperature(event) {
+        event.preventDefault();
+        celsiusLink.classList.remove("active");
+        fahrenheitLink.classList.add("active");
+        let temperatureElement = document.querySelector(".currentTemp");
+        let fahrenheiTemperature = (celsiusTemperature * 9) / 5 + 32;
+        temperatureElement.innerHTML = `${Math.round(fahrenheiTemperature)}°F`;
+
+        element = document.getElementById("CelPic");
+        if (element.src.match("celcius_on.jpg")) {
+          element.src = "celcius_off.jpg";
+        } else {
+          element.src = "celcius_off.jpg";
+        }
+
+        elementone = document.getElementById("FahPic");
+        if (elementone.src.match("fahrenheit_off.jpg")) {
+          elementone.src = "fahrenheit_on.jpg";
+        } else {
+          elementone.src = "fahrenheit_on.jpg";
+        }
+      }
+      //////////////////////
+      function displayCelsiusTemperature(event) {
+        event.preventDefault();
+        celsiusLink.classList.add("active");
+        fahrenheitLink.classList.remove("active");
+        let temperatureElement = document.querySelector(".currentTemp");
+        temperatureElement.innerHTML = `${Math.round(celsiusTemperature)}°C`;
+
+        element = document.getElementById("CelPic");
+        if (element.src.match("celcius_off.jpg")) {
+          element.src = "celcius_on.jpg";
+        } else {
+          element.src = "celcius_on.jpg";
+        }
+
+        elementone = document.getElementById("FahPic");
+        if (elementone.src.match("fahrenheit_on.jpg")) {
+          elementone.src = "fahrenheit_off.jpg";
+        } else {
+          elementone.src = "fahrenheit_off.jpg";
+        }
+      }
+
+      let celsiusTemperature = null;
+
+      let form = document.querySelector("#text-form");
+      form.addEventListener("submit", SearchSubmit);
+
+      let fahrenheitLink = document.querySelector("#fah");
+      fahrenheitLink.addEventListener("click", displayFahrenheitTemperature);
+
+      let celsiusLink = document.querySelector("#cel");
+      celsiusLink.addEventListener("click", displayCelsiusTemperature);
+
+      search("Paris");
     </script>
   </body>
 </html>
